@@ -1,0 +1,5 @@
+.idea
+
+/app/env/
+__pycache__
+*.sqlite3
