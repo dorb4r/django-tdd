@@ -79,7 +79,7 @@ class MoviesViewSet(ViewSet):
             raise Http404
 
     def list(self, request):
-        serializer = self.serializer_class(self.queryset, many=True)
+        serializer = self.serializer_class(self.queryset.all(), many=True)
         return Response(serializer.data)
 
     def create(self, request):
