@@ -65,6 +65,7 @@ class MoviesViewSet(ViewSet):
     """
 
     """
+
     model = Movie
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer

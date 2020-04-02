@@ -10,6 +10,7 @@ class CustomUser(AbstractUser):
     """
     This
     """
+
     pass
 
 
@@ -17,6 +18,7 @@ class Movie(models.Model):
     """
     Describe a movie title
     """
+
     title = models.CharField(max_length=255)
     genre = models.CharField(max_length=255)
     year = models.CharField(max_length=4)
