@@ -8,11 +8,11 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONBUFFERD 1
 ENV DEBUG 0
-ENV SECRETE_KEY 5myo768p0suajzyx8w=*3yz(71%uu3y33#2_0q$ev-*5*4
-ENV DJANGO_ALLOWED_HOSTS localhost 127.0.0.1 [::1]
+ENV SECRET_KEY 5myo768p0suajzyx8w=*3yz(71%uu3y33#2_0q$ev-*5*4
+ENV DJANGO_ALLOWED_HOSTS .herokuapp.com
 
 # Install psycopg2 dependencies
-RUN apt update \
+RUN apk update \
     && apk add postgresql-dev gcc python3-dev musl-dev
 
 # Install dependencies
@@ -23,9 +23,12 @@ RUN pip install -r requirements.txt
 # Copy project code
 COPY . /usr/src/app/
 
+# Collect the Django static files
+RUN python manage.py collectstatic --noinput
+
 # Add non root user
 RUN adduser -D myuser
-RUN myuser
+USER myuser
 
 # Run Gunicorn
-CMD gunicorn drf_project.wsgi:application --bing 0.0.0.0:$PORT
+CMD gunicorn drf_project.wsgi:application --bind 0.0.0.0:$PORT
